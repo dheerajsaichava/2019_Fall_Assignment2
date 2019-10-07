@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace _2019_Fall_Assignment2
 {
@@ -144,7 +145,35 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                List<int> start_time = new List<int>();
+                List<int> end_time = new List<int>();
+                for (int i = 0; i < intervals.GetLength(0); i++)
+                {
+                    start_time.Add(intervals[i, 0]);
+                }
+                for (int i = 0; i < intervals.GetLength(0); i++)
+                {
+                    end_time.Add(intervals[i, 1]);
+                }
+                start_time.Sort();
+                end_time.Sort();
+                int k = 0, j = 0, rooms = 0;
+
+                while (k < intervals.GetLength(0))
+                {
+                    if (start_time[k] < end_time[j])
+                    {
+                        k++;
+                    }
+
+                    else if (start_time[k] > end_time[j])
+                    {
+                        j++;
+                    }
+                    rooms = Math.Max(rooms, k - j);
+                }
+                return rooms;
+
             }
             catch
             {
